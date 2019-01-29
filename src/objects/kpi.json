@@ -1,0 +1,9 @@
+{
+    "qInfo": {
+        "qId": "kpi",
+        "qType": "kpiobject"
+    },
+    "value": {
+        "qValueExpression": "Sum(score)"
+    }
+}

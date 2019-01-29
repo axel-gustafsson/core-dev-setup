@@ -1,0 +1,14 @@
+engine: localhost:1337
+ttl: 60
+script: ./loadscript.qvs
+
+connections:
+  bigquery:
+    connectionstring: CUSTOM CONNECT TO "provider=jdbc;driver=bigquery;host=https://www.googleapis.com/bigquery/v2;port=443;ProjectId=buoyant-arcanum-230013;OAuthType=0;OAuthServiceAcctEmail=admin-310@buoyant-arcanum-230013.iam.gserviceaccount.com;OAuthPvtKeyPath=/secrets/bigquery.json;"
+    type: 'jdbc'
+  qvd:
+    type: folder
+    connectionstring: /apps
+
+objects:
+  - ./objects/*.json

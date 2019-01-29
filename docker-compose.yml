@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+
+  bigquery:
+    build: 'https://github.com/mindspank/core-grpc-jdbc-connector.git'
+    ports: 
+      - '50051:50051'
+    volumes:
+      - './secrets/bigquery.json:/secrets/bigquery.json'
+
+  engine:
+    image: 'qlikcore/engine:$ENGINE_VERSION'
+    restart: always
+    container_name: engine
+    command: >-
+      -S AcceptEULA=yes -S DocumentDirectory=/apps -S
+      ExtensionsDirectory=/extensions -S MediaDirectory=/media 
+      -S EnableGrpcCustomConnectors=1 -S GrpcConnectorPlugins="jdbc,bigquery:50051" ${ENGINE_PARAMS}
+    volumes:
+      - '$APPS_PATH:/apps'
+      - '$MEDIA_PATH:/media'
+      - '$EXTENSIONS_PATH:/extensions'
+    ports:
+      - '1337:9076'

@@ -1,0 +1,9 @@
+LIB CONNECT to 'bigquery';
+
+subreddits:
+Load *, 
+    score as [Reddit Score]
+;
+SELECT * FROM `fh-bigquery.reddit.subreddits`;
+
+STORE subreddits INTO lib://qvd/subreddits.qvd (qvd);
